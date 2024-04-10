@@ -66,7 +66,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.dagger.hilt)
     implementation(libs.dagger.hilt.navigation)
-    implementation(libs.kapt)
     implementation(libs.moshi)
     implementation(libs.moshi.retrofit)
     implementation(libs.hilt.viewmodel)
