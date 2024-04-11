@@ -9,8 +9,9 @@ import kotlinx.coroutines.flow.flowOn
 import okhttp3.Dispatcher
 import okio.IOException
 import retrofit2.Response
+import javax.inject.Inject
 
-abstract class BaseRepository {
+abstract class BaseRepository @Inject constructor() {
 
     suspend fun <T> safeApiCall(
         apiCall: suspend () -> Response<T>
