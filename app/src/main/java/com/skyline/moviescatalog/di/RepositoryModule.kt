@@ -12,7 +12,6 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class RepositoryModule {
 
     @Binds
-    abstract fun provideMovieRepository(
-        repo:MovieRepositoryImpl
-    ): MovieRepository
-}
+    abstract fun bindMovieRepository(repo: MovieRepositoryImpl): MovieRepository
+
+    }

@@ -11,7 +11,7 @@ import okio.IOException
 import retrofit2.Response
 import javax.inject.Inject
 
-abstract class BaseRepository @Inject constructor() {
+abstract class BaseRepository {
 
     suspend fun <T> safeApiCall(
         apiCall: suspend () -> Response<T>

@@ -17,28 +17,33 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val useCase: MovieUseCase
+    private val movieUseCase: MovieUseCase
 ) : ViewModel() {
-    private val _response: MutableState<MovieState> = mutableStateOf(MovieState())
-    val response: State<MovieState> = _response
+    private val _movieResponse: MutableState<MovieState> = mutableStateOf(MovieState())
+    val response: State<MovieState> = _movieResponse
+
 
     init {
-        viewModelScope.launch {
-            useCase.getMovies()
-                .doOnSuccess {
-                    _response.value = MovieState(
-                        data = it.orEmpty()
-                    )
-                }.doOnFailure {
-                    _response.value = MovieState(
-                        error = it?.message.orEmpty()
-                    )
-                }.doOnLoading {
-                    _response.value = MovieState(
-                        isLoading = true
-                    )
-                }.collect()
-        }
+        getMovies()
+    }
+
+    private fun getMovies() = viewModelScope.launch {
+        movieUseCase.getMovies()
+            .doOnSuccess {
+                _movieResponse.value = MovieState(
+                    it.orEmpty(),
+                )
+            }
+            .doOnFailure {
+                _movieResponse.value = MovieState(
+                    error = it.toString(),
+                )
+            }
+            .doOnLoading {
+                _movieResponse.value = MovieState(
+                    isLoading =  true
+                )
+            }.collect()
     }
 }
 
